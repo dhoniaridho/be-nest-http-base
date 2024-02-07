@@ -9,4 +9,9 @@ export class HelloController {
   getHello(): string {
     return this.helloService.getHello();
   }
+
+  @Get('paginate')
+  paginate() {
+    return this.helloService.paginate();
+  }
 }
