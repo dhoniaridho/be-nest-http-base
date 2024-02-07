@@ -5,6 +5,6 @@ import { PrismaService } from 'src/platform/database/services/prisma.service';
 export class HelloRepository {
   constructor(private readonly prismaService: PrismaService) {}
   paginate() {
-    return this.prismaService.user.findMany();
+    return this.prismaService.users.findMany();
   }
 }
