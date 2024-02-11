@@ -1,7 +1,20 @@
-import { Module } from '@nestjs/common';
-import { HelloModule } from './hello/hello.module';
+import { Controller, Get, Module } from '@nestjs/common';
+import { UsersModule } from './users/users.module';
+
+@Controller()
+class AppController {
+  constructor() {}
+
+  @Get()
+  getHello() {
+    return {
+      appVersion: 1,
+    };
+  }
+}
 
 @Module({
-  imports: [HelloModule],
+  imports: [UsersModule],
+  controllers: [AppController],
 })
 export class AppModule {}
