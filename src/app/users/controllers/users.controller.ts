@@ -14,9 +14,14 @@ import { UsersService } from '../services';
 import { PaginationQueryDto } from 'src/common/dtos/pagination-query.dto';
 import { ResponseEntity } from 'src/common/entities/response.entity';
 import { CreateUserDto } from '../dtos/create-user.dto';
+import { ApiTags } from '@nestjs/swagger';
 
-@Controller('users')
-export class usersController {
+@ApiTags('Users')
+@Controller({
+  path: 'users',
+  version: '1',
+})
+export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
   @Post()
