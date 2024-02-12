@@ -9,6 +9,7 @@ WORKDIR /app
 COPY package.json pnpm-lock.yaml ./
 RUN npm install husky -g
 RUN pnpm install
+RUN pnpm db:generate
 
 FROM base AS build
 

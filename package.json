@@ -2,7 +2,7 @@
   "name": "nest-base",
   "version": "0.0.1",
   "description": "",
-  "author": "",
+  "author": "dhoniaridho",
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
@@ -24,7 +24,8 @@
     "db:reset": "npx prisma db push --force-reset",
     "db:generate": "prisma generate",
     "deps:update": "ncu -u",
-    "deps:check": "ncu"
+    "deps:check": "ncu",
+    "new:feature": "node .generators/main.js"
   },
   "dependencies": {
     "@fastify/static": "^7.0.1",
@@ -33,6 +34,7 @@
     "@nestjs/platform-express": "^10.0.0",
     "@nestjs/platform-fastify": "^10.3.2",
     "@nestjs/swagger": "^7.3.0",
+    "@node-rs/argon2": "^1.7.2",
     "@prisma/client": "^5.9.1",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.1",
@@ -55,8 +57,11 @@
     "eslint": "^8.42.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-prettier": "^5.0.0",
+    "handlebars": "^4.7.8",
     "husky": "^9.0.10",
+    "inquirer": "^9.2.14",
     "jest": "^29.5.0",
+    "pluralize": "^8.0.0",
     "prettier": "^3.0.0",
     "prisma": "^5.9.1",
     "source-map-support": "^0.5.21",

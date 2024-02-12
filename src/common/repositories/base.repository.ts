@@ -43,7 +43,7 @@ export class BaseRepository<Where, Select, OrderBy, Include, Create> {
   }
 
   all() {
-    return this.prismaService.users.findMany({
+    return this.prismaService[this.model].findMany({
       where: this._where,
       select: this._select,
       orderBy: this._orderBy,
@@ -51,7 +51,7 @@ export class BaseRepository<Where, Select, OrderBy, Include, Create> {
   }
 
   first() {
-    return this.prismaService.users.findFirst({
+    return this.prismaService[this.model].findFirst({
       where: this._where,
       select: this._select,
       orderBy: this._orderBy,
@@ -59,7 +59,7 @@ export class BaseRepository<Where, Select, OrderBy, Include, Create> {
   }
 
   firstOrThrow() {
-    return this.prismaService.users.findFirstOrThrow({
+    return this.prismaService[this.model].findFirstOrThrow({
       where: this._where,
       select: this._select,
       orderBy: this._orderBy,
@@ -67,7 +67,7 @@ export class BaseRepository<Where, Select, OrderBy, Include, Create> {
   }
 
   async delete(id: string) {
-    return this.prismaService.users.delete({
+    return this.prismaService[this.model].delete({
       where: {
         id,
       },
@@ -75,13 +75,13 @@ export class BaseRepository<Where, Select, OrderBy, Include, Create> {
   }
 
   async deleteMany() {
-    return this.prismaService.users.deleteMany({
+    return this.prismaService[this.model].deleteMany({
       where: this._where,
     });
   }
 
   async create(c: Create) {
-    return this.prismaService.users.create({
+    return this.prismaService[this.model].create({
       data: c as any,
       select: this._select,
     });
@@ -90,14 +90,14 @@ export class BaseRepository<Where, Select, OrderBy, Include, Create> {
   async paginate({ limit = 10, page = 1 }: PaginationQueryDto) {
     try {
       const [data, totalData] = await Promise.all([
-        this.prismaService.users.findMany({
+        this.prismaService[this.model].findMany({
           where: this._where,
           select: this._select,
           orderBy: this._orderBy,
           take: +limit,
           skip: (+page - 1) * +limit,
         }),
-        this.prismaService.users.count({
+        this.prismaService[this.model].count({
           where: this._where,
         }),
       ]);
@@ -113,7 +113,7 @@ export class BaseRepository<Where, Select, OrderBy, Include, Create> {
   }
 
   async update(id: string, c: Partial<Create>) {
-    return this.prismaService.users.update({
+    return this.prismaService[this.model].update({
       where: {
         id,
       },
@@ -123,7 +123,7 @@ export class BaseRepository<Where, Select, OrderBy, Include, Create> {
   }
 
   async updateMany(c: Partial<Create>) {
-    return this.prismaService.users.updateMany({
+    return this.prismaService[this.model].updateMany({
       where: this._where,
       data: c,
     });

@@ -32,6 +32,22 @@
 $ pnpm install
 ```
 
+## Useful command
+
+```bash
+# update database schema
+$ pnpm db:push
+
+# generate model from connection
+$ pnpm db:pull
+
+# generate db client
+$ pnpm db:generate
+
+# create new feature with single command
+$ pnpm new:feature
+```
+
 ## Running the app
 
 ```bash
@@ -61,12 +77,6 @@ $ pnpm run test:cov
 ## Support
 
 Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
 
 ## License
 

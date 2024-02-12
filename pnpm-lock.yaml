@@ -23,6 +23,9 @@ dependencies:
   '@nestjs/swagger':
     specifier: ^7.3.0
     version: 7.3.0(@fastify/static@7.0.1)(@nestjs/common@10.3.2)(@nestjs/core@10.3.2)(class-transformer@0.5.1)(class-validator@0.14.1)(reflect-metadata@0.1.14)
+  '@node-rs/argon2':
+    specifier: ^1.7.2
+    version: 1.7.2
   '@prisma/client':
     specifier: ^5.9.1
     version: 5.9.1(prisma@5.9.1)
@@ -85,12 +88,21 @@ devDependencies:
   eslint-plugin-prettier:
     specifier: ^5.0.0
     version: 5.1.3(eslint-config-prettier@9.1.0)(eslint@8.56.0)(prettier@3.2.5)
+  handlebars:
+    specifier: ^4.7.8
+    version: 4.7.8
   husky:
     specifier: ^9.0.10
     version: 9.0.10
+  inquirer:
+    specifier: ^9.2.14
+    version: 9.2.14
   jest:
     specifier: ^29.5.0
     version: 29.7.0(@types/node@20.11.16)(ts-node@10.9.2)
+  pluralize:
+    specifier: ^8.0.0
+    version: 8.0.0
   prettier:
     specifier: ^3.0.0
     version: 3.2.5
@@ -553,6 +565,22 @@ packages:
       '@jridgewell/trace-mapping': 0.3.9
     dev: true
 
+  /@emnapi/core@0.45.0:
+    resolution: {integrity: sha512-DPWjcUDQkCeEM4VnljEOEcXdAD7pp8zSZsgOujk/LGIwCXWbXJngin+MO4zbH429lzeC3WbYLGjE2MaUOwzpyw==}
+    requiresBuild: true
+    dependencies:
+      tslib: 2.6.2
+    dev: false
+    optional: true
+
+  /@emnapi/runtime@0.45.0:
+    resolution: {integrity: sha512-Txumi3td7J4A/xTTwlssKieHKTGl3j4A1tglBx72auZ49YK7ePY6XZricgIg9mnZT4xPfA+UPCUdnhRuEFDL+w==}
+    requiresBuild: true
+    dependencies:
+      tslib: 2.6.2
+    dev: false
+    optional: true
+
   /@eslint-community/eslint-utils@4.4.0(eslint@8.56.0):
     resolution: {integrity: sha512-1/sA4dwrzBAyeUoQ6oxahHKmrZvsnLCg4RfxW3ZFGGmQkSNQPFNLV9CUEFQP1x9EYXHTo5p6xdhZM1Ne9p/AfA==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
@@ -1006,6 +1034,16 @@ packages:
       os-filter-obj: 2.0.0
     dev: true
 
+  /@napi-rs/wasm-runtime@0.1.1:
+    resolution: {integrity: sha512-ATj9ua659JgrkICjJscaeZdmPr44cb/KFjNWuD0N6pux0SpzaM7+iOuuK11mAnQM2N9q0DT4REu6NkL8ZEhopw==}
+    requiresBuild: true
+    dependencies:
+      '@emnapi/core': 0.45.0
+      '@emnapi/runtime': 0.45.0
+      '@tybys/wasm-util': 0.8.1
+    dev: false
+    optional: true
+
   /@nestjs/cli@10.3.1(@swc/cli@0.3.9)(@swc/core@1.4.0):
     resolution: {integrity: sha512-xzabUxTdZ7IcNXLzAq1YZgGJkAt6JNeeLVORj8MfMV0io2edgAn5ASn4tIOHvnsmKh6yX1kBaVEhTHiuENlplA==}
     engines: {node: '>= 16.14'}
@@ -1227,6 +1265,153 @@ packages:
       '@nestjs/platform-express': 10.3.2(@nestjs/common@10.3.2)(@nestjs/core@10.3.2)
       tslib: 2.6.2
     dev: true
+
+  /@node-rs/argon2-android-arm-eabi@1.7.2:
+    resolution: {integrity: sha512-WhW84XOzdR4AOGc4BJvIg5lCRVBL0pXp/PPCe8QCyWw493p7VdNCdYpr2xdtjS/0zImmY85HNB/6zpzjLRTT/A==}
+    engines: {node: '>= 10'}
+    cpu: [arm]
+    os: [android]
+    requiresBuild: true
+    dev: false
+    optional: true
+
+  /@node-rs/argon2-android-arm64@1.7.2:
+    resolution: {integrity: sha512-CdtayHSMIyDuVhSYFirwA757c4foQuyTjpysgFJLHweP9C7uDiBf9WBYij+UyabpaCadJ0wPyK6Vakinvlk4/g==}
+    engines: {node: '>= 10'}
+    cpu: [arm64]
+    os: [android]
+    requiresBuild: true
+    dev: false
+    optional: true
+
+  /@node-rs/argon2-darwin-arm64@1.7.2:
+    resolution: {integrity: sha512-hUOhtgYHTEyzX5sgMZVdXunONOus2HWpWydF5D/RYJ1mZ76FXRnFpQE40DqbzisdPIraKdn40m7JqkPP7wqdyg==}
+    engines: {node: '>= 10'}
+    cpu: [arm64]
+    os: [darwin]
+    requiresBuild: true
+    dev: false
+    optional: true
+
+  /@node-rs/argon2-darwin-x64@1.7.2:
+    resolution: {integrity: sha512-lfs5HX+t542yUfcv6Aa/NeGD1nUCwyQNgnPEGcik71Ow6V13hkR1bHgmT1u3CHN4fBts0gW+DQEDsq1xlVgkvw==}
+    engines: {node: '>= 10'}
+    cpu: [x64]
+    os: [darwin]
+    requiresBuild: true
+    dev: false
+    optional: true
+
+  /@node-rs/argon2-freebsd-x64@1.7.2:
+    resolution: {integrity: sha512-ROoF+4VaCBJUjddrTN1hjuqSl89ppRcjVXJscSPJjWzTlbzFmGGovJvIzUBmCr/Oq3yM1zKHj6MP9oRD5cB+/g==}
+    engines: {node: '>= 10'}
+    cpu: [x64]
+    os: [freebsd]
+    requiresBuild: true
+    dev: false
+    optional: true
+
+  /@node-rs/argon2-linux-arm-gnueabihf@1.7.2:
+    resolution: {integrity: sha512-CBSB8KPI8LS74Bcz3dYaa2/khULutz4vSDvFWUERlSLX+mPdDhoZi6UPuUPPF9e01w8AbiK1YCqlLUTm3tIMfw==}
+    engines: {node: '>= 10'}
+    cpu: [arm]
+    os: [linux]
+    requiresBuild: true
+    dev: false
+    optional: true
+
+  /@node-rs/argon2-linux-arm64-gnu@1.7.2:
+    resolution: {integrity: sha512-6LBTug6ZiWFakP3X3Nqs7ZTM03gmcSWX4YvEn20HhhQE5NDrsrw3zNqGj0cJiNzKKIMSDDuj7uGy+ITEfNo4CA==}
+    engines: {node: '>= 10'}
+    cpu: [arm64]
+    os: [linux]
+    requiresBuild: true
+    dev: false
+    optional: true
+
+  /@node-rs/argon2-linux-arm64-musl@1.7.2:
+    resolution: {integrity: sha512-KjhQ+ZPne29t9VRVeIif7JdKwQba+tM6CBNYBoJB1iON0CUKeqSQtZcHuTj9gkf2SNRG5bsU4ABcfxd0OKsKHg==}
+    engines: {node: '>= 10'}
+    cpu: [arm64]
+    os: [linux]
+    requiresBuild: true
+    dev: false
+    optional: true
+
+  /@node-rs/argon2-linux-x64-gnu@1.7.2:
+    resolution: {integrity: sha512-BQvp+iLtKqomHz4q5t1aKoni9osgvUDU5sZtHAlFm5dRTlGHnympcQVATRE5GHyH9C6MIM9W7P1kqEeCLGPolQ==}
+    engines: {node: '>= 10'}
+    cpu: [x64]
+    os: [linux]
+    requiresBuild: true
+    dev: false
+    optional: true
+
+  /@node-rs/argon2-linux-x64-musl@1.7.2:
+    resolution: {integrity: sha512-yXJudpBZQ98g+lWaHn9EzZ5KsAyqRdlpub/K+5NP7gHehb8wzBRIFAejIHAG0fvzQEEc86VOnV2koWIVZxWAvw==}
+    engines: {node: '>= 10'}
+    cpu: [x64]
+    os: [linux]
+    requiresBuild: true
+    dev: false
+    optional: true
+
+  /@node-rs/argon2-wasm32-wasi@1.7.2:
+    resolution: {integrity: sha512-diXlVjJZY2GIV8ZDwUqXPhacXsFR0klGSv5D9f+XidwWXK4udtzDhkM/7N/Mb7h1HAWaxZ6IN9spYFjvWH1wqg==}
+    engines: {node: '>=14.0.0'}
+    cpu: [wasm32]
+    requiresBuild: true
+    dependencies:
+      '@napi-rs/wasm-runtime': 0.1.1
+    dev: false
+    optional: true
+
+  /@node-rs/argon2-win32-arm64-msvc@1.7.2:
+    resolution: {integrity: sha512-dhIBrY04P9nbmwzBpgERQDmmSu4YBZyeEE32t4TikMz5rQ07iaVC+JpGmtCBZoDIsLDHGC8cikENd3YEqpqIcA==}
+    engines: {node: '>= 10'}
+    cpu: [arm64]
+    os: [win32]
+    requiresBuild: true
+    dev: false
+    optional: true
+
+  /@node-rs/argon2-win32-ia32-msvc@1.7.2:
+    resolution: {integrity: sha512-o1tfqr8gyALCzuxBoQfvhxkeYMaw/0H8Gmt7klTYyEIBvEFu7SD5qytXO9Px7t5420nZL/Wy5cflg3IB1s57Pg==}
+    engines: {node: '>= 10'}
+    cpu: [ia32]
+    os: [win32]
+    requiresBuild: true
+    dev: false
+    optional: true
+
+  /@node-rs/argon2-win32-x64-msvc@1.7.2:
+    resolution: {integrity: sha512-v0h53XUc7hNgWiWi0qcMcHvj9/kwuItI9NwLK4C+gtzT3UB0cedhfIL8HFMKThMXasy41ZdbpCF2Bi0kJoLNEg==}
+    engines: {node: '>= 10'}
+    cpu: [x64]
+    os: [win32]
+    requiresBuild: true
+    dev: false
+    optional: true
+
+  /@node-rs/argon2@1.7.2:
+    resolution: {integrity: sha512-+H6pc3M1vIX9YnG59YW7prHhhpv19P8YyxlXHnnFzTimf2q+kKDF7mGWbhvN9STqIY+P70Patn0Q6qb6Ib5/4g==}
+    engines: {node: '>= 10'}
+    optionalDependencies:
+      '@node-rs/argon2-android-arm-eabi': 1.7.2
+      '@node-rs/argon2-android-arm64': 1.7.2
+      '@node-rs/argon2-darwin-arm64': 1.7.2
+      '@node-rs/argon2-darwin-x64': 1.7.2
+      '@node-rs/argon2-freebsd-x64': 1.7.2
+      '@node-rs/argon2-linux-arm-gnueabihf': 1.7.2
+      '@node-rs/argon2-linux-arm64-gnu': 1.7.2
+      '@node-rs/argon2-linux-arm64-musl': 1.7.2
+      '@node-rs/argon2-linux-x64-gnu': 1.7.2
+      '@node-rs/argon2-linux-x64-musl': 1.7.2
+      '@node-rs/argon2-wasm32-wasi': 1.7.2
+      '@node-rs/argon2-win32-arm64-msvc': 1.7.2
+      '@node-rs/argon2-win32-ia32-msvc': 1.7.2
+      '@node-rs/argon2-win32-x64-msvc': 1.7.2
+    dev: false
 
   /@nodelib/fs.scandir@2.1.5:
     resolution: {integrity: sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g==}
@@ -1660,6 +1845,14 @@ packages:
       '@tufjs/canonical-json': 1.0.0
       minimatch: 9.0.3
     dev: false
+
+  /@tybys/wasm-util@0.8.1:
+    resolution: {integrity: sha512-GSsTwyBl4pIzsxAY5wroZdyQKyhXk0d8PCRZtrSZ2WEB1cBdrp2EgGBwHOGCZtIIPun/DL3+AykCv+J6fyRH4Q==}
+    requiresBuild: true
+    dependencies:
+      tslib: 2.6.2
+    dev: false
+    optional: true
 
   /@types/babel__core@7.20.5:
     resolution: {integrity: sha512-qoQprZvz5wQFJwMDqeseRXWv3rqMvhgpbXFfVyWhbx9X47POIA6i/+dXefEmZKoAgOaTdaIgNSMqMIU61yRyzA==}
@@ -4084,6 +4277,19 @@ packages:
     resolution: {integrity: sha512-EtKwoO6kxCL9WO5xipiHTZlSzBm7WLT627TqC/uVRd0HKmq8NXyebnNYxDoBi7wt8eTWrUrKXCOVaFq9x1kgag==}
     dev: true
 
+  /handlebars@4.7.8:
+    resolution: {integrity: sha512-vafaFqs8MZkRrSX7sFVUdo3ap/eNiLnb4IakshzvP56X5Nr1iGKAIqdX6tMlm6HcNRIkr6AxO5jFEoJzzpT8aQ==}
+    engines: {node: '>=0.4.7'}
+    hasBin: true
+    dependencies:
+      minimist: 1.2.8
+      neo-async: 2.6.2
+      source-map: 0.6.1
+      wordwrap: 1.0.0
+    optionalDependencies:
+      uglify-js: 3.17.4
+    dev: true
+
   /has-flag@3.0.0:
     resolution: {integrity: sha512-sKJf1+ceQBr4SMkvQnBDNDtf4TXpVhVGateu0t918bl30FnbE2m4vNLX+VWe/dpjlb+HugGYzW7uQXH98HPEYw==}
     engines: {node: '>=4'}
@@ -4335,6 +4541,27 @@ packages:
       cli-width: 4.1.0
       external-editor: 3.1.0
       figures: 5.0.0
+      lodash: 4.17.21
+      mute-stream: 1.0.0
+      ora: 5.4.1
+      run-async: 3.0.0
+      rxjs: 7.8.1
+      string-width: 4.2.3
+      strip-ansi: 6.0.1
+      wrap-ansi: 6.2.0
+    dev: true
+
+  /inquirer@9.2.14:
+    resolution: {integrity: sha512-4ByIMt677Iz5AvjyKrDpzaepIyMewNvDcvwpVVRZNmy9dLakVoVgdCHZXbK1SlVJra1db0JZ6XkJyHsanpdrdQ==}
+    engines: {node: '>=18'}
+    dependencies:
+      '@ljharb/through': 2.3.12
+      ansi-escapes: 4.3.2
+      chalk: 5.3.0
+      cli-cursor: 3.1.0
+      cli-width: 4.1.0
+      external-editor: 3.1.0
+      figures: 3.2.0
       lodash: 4.17.21
       mute-stream: 1.0.0
       ora: 5.4.1
@@ -7278,6 +7505,14 @@ packages:
     hasBin: true
     dev: true
 
+  /uglify-js@3.17.4:
+    resolution: {integrity: sha512-T9q82TJI9e/C1TAxYvfb16xO120tMVFZrGA3f9/P4424DNu6ypK103y0GPFVa17yotwSyZW5iYXgjYHkGrJW/g==}
+    engines: {node: '>=0.8.0'}
+    hasBin: true
+    requiresBuild: true
+    dev: true
+    optional: true
+
   /uid@2.0.2:
     resolution: {integrity: sha512-u3xV3X7uzvi5b1MncmZo3i2Aw222Zk1keqLA1YkHldREkAhAqi65wuPfe7lHx8H/Wzy+8CE7S7uS3jekIM5s8g==}
     engines: {node: '>=8'}
@@ -7528,6 +7763,10 @@ packages:
     dependencies:
       string-width: 5.1.2
     dev: false
+
+  /wordwrap@1.0.0:
+    resolution: {integrity: sha512-gvVzJFlPycKc5dZN4yPkP8w7Dc37BtP1yczEneOb4uq34pXZcvrtRTmWV8W+Ume+XCxKgbjM+nevkyFPMybd4Q==}
+    dev: true
 
   /wrap-ansi@6.2.0:
     resolution: {integrity: sha512-r6lPcBGxZXlIcymEu7InxDMhdW0KDxpLgoFLcguasxCaJ/SOIZwINatK9KY/tf+ZrlywOKU0UDj3ATXUBfxJXA==}

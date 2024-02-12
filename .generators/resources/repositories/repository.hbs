@@ -1,0 +1,16 @@
+import { Injectable } from '@nestjs/common';
+import { Prisma } from '@prisma/client';
+import { BaseRepository } from 'src/common/repositories/base.repository';
+
+@Injectable()
+export class {{className}}Repository extends BaseRepository<
+  Prisma.{{className}}WhereInput,
+  Prisma.{{className}}Select & Prisma.{{className}}CountOutputTypeSelect,
+  Prisma.{{className}}OrderByWithRelationInput,
+  Prisma.{{className}}Include,
+  Prisma.{{className}}CreateInput
+> {
+  constructor() {
+    super('{{tableName}}');
+  }
+}
