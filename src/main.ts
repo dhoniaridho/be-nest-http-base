@@ -1,7 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { MainModule } from './main.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import { ValidationPipe } from '@nestjs/common';
+import { Logger, ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
   const app = await NestFactory.create(MainModule);
@@ -21,5 +21,6 @@ async function bootstrap() {
     credentials: true,
   });
   await app.listen(3000);
+  Logger.log(`Application is running on: ${await app.getUrl()}`);
 }
 bootstrap();
