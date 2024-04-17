@@ -3,9 +3,10 @@ const fs = require('fs');
 const hbs = require('handlebars');
 const { cwd } = require('process');
 const pluralize = require('pluralize');
+const { startCase } = require('lodash');
 
 const DEST_PATH = (mod) => cwd() + '/src/app/' + mod;
-const ORIGIN_PATH = cwd() + '/.generators/resources';
+const ORIGIN_PATH = cwd() + '/scripts/generators/resources';
 const FOLDERS = [
   'controllers',
   'dtos',
@@ -54,12 +55,13 @@ const toCamelCase = (/** @type {string} */ str) => {
 
 const compile = (
   /** @type {string} */ content,
-  { className, variableName, fileName },
+  { className, variableName, fileName, modelName },
 ) => {
   const template = hbs.compile(content)({
     className: className,
     variableName: variableName,
     fileName: fileName,
+    modelName,
   });
   return template;
 };
@@ -73,11 +75,18 @@ async function main() {
       name: 'name',
       message: "What's your feature name?",
     },
+    {
+      type: 'input',
+      name: 'model',
+      message: "What's your model name?",
+    },
   ];
   term.prompt(questions).then((answers) => {
     const pluralizeText = pluralize(answers.name);
-    const className = toTitleCase(pluralizeText);
-    const variableName = toCamelCase(pluralizeText);
+    const modelName = answers.model;
+    const className = startCase(pluralizeText).replace(/ /g, '');
+    const variableName = modelName.toLowerCase();
+
     const fileName = slugify(pluralizeText);
 
     const dest = DEST_PATH(fileName);
@@ -156,6 +165,7 @@ async function main() {
         className,
         variableName,
         fileName,
+        modelName,
       });
 
       fs.writeFileSync(file.path, out);

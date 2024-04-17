@@ -7,6 +7,12 @@
       "decorators": true,
       "dynamicImport": true
     },
+    "minify": {
+      "compress": {
+        "unused": true
+      },
+      "mangle": false
+    },
     "baseUrl": "./",
     "paths": {
       "~/*": [

@@ -65,9 +65,9 @@ export class {{className}}Controller {
   }
 
   @Delete(':id')
-  public destroy(@Param('id') id: string) {
+  public async destroy(@Param('id') id: string) {
     try {
-      const data = this.{{variableName}}Service.destroy(id);
+      const data = await this.{{variableName}}Service.destroy(id);
       return new ResponseEntity({
         data,
         message: 'success',

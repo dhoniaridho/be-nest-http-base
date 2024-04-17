@@ -1,30 +1,25 @@
 import { NestFactory } from '@nestjs/core';
-import { ValidationPipe, Logger, VersioningType } from '@nestjs/common';
 import { MainModule } from './main.module';
-import {
-  FastifyAdapter,
-  NestFastifyApplication,
-} from '@nestjs/platform-fastify';
-import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
-  const app = await NestFactory.create<NestFastifyApplication>(
-    MainModule,
-    new FastifyAdapter(),
-  );
-  app.useGlobalPipes(new ValidationPipe());
-  app.enableVersioning({
-    type: VersioningType.URI,
-  });
-
+  const app = await NestFactory.create(MainModule);
   const config = new DocumentBuilder()
-    .setTitle('App API')
+    .setTitle('App example')
+    .setDescription('The app API description')
     .setVersion('1.0')
+    .addTag('app')
+    .addSecurity('JWT', { type: 'http', scheme: 'bearer', bearerFormat: 'JWT' })
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
-
+  app.useGlobalPipes(new ValidationPipe());
+  app.enableCors({
+    allowedHeaders: '*',
+    origin: '*',
+    credentials: true,
+  });
   await app.listen(3000);
-  Logger.log(`Application is running on: ${await app.getUrl()}`);
 }
 bootstrap();

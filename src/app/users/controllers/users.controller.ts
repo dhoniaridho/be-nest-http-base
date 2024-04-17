@@ -9,25 +9,29 @@ import {
   Post,
   Put,
   Query,
+  UseGuards,
 } from '@nestjs/common';
 import { UsersService } from '../services';
 import { PaginationQueryDto } from 'src/common/dtos/pagination-query.dto';
 import { ResponseEntity } from 'src/common/entities/response.entity';
-import { CreateUserDto } from '../dtos/create-user.dto';
-import { ApiTags } from '@nestjs/swagger';
+import { CreateUsersDto, UpdateUsersDto } from '../dtos';
+import { ApiSecurity, ApiTags } from '@nestjs/swagger';
+import { AuthGuard } from 'src/app/auth';
 
 @ApiTags('Users')
+@ApiSecurity('JWT')
+@UseGuards(AuthGuard)
 @Controller({
-  path: 'users',
+  path: 'user',
   version: '1',
 })
 export class UsersController {
-  constructor(private readonly usersService: UsersService) {}
+  constructor(private readonly userService: UsersService) {}
 
   @Post()
-  public async create(@Body() createUserDto: CreateUserDto) {
+  public async create(@Body() createUsersDto: CreateUsersDto) {
     try {
-      const data = await this.usersService.create(createUserDto);
+      const data = await this.userService.create(createUsersDto);
       return new ResponseEntity({
         data,
         message: 'success',
@@ -40,7 +44,7 @@ export class UsersController {
   @Get()
   public async index(@Query() paginateDto: PaginationQueryDto) {
     try {
-      const data = await this.usersService.paginate(paginateDto);
+      const data = await this.userService.paginate(paginateDto);
       return new ResponseEntity({
         data,
         message: 'success',
@@ -53,7 +57,7 @@ export class UsersController {
   @Get(':id')
   public async detail(@Param('id') id: string) {
     try {
-      const data = await this.usersService.detail(id);
+      const data = await this.userService.detail(id);
 
       return new ResponseEntity({
         data,
@@ -65,9 +69,9 @@ export class UsersController {
   }
 
   @Delete(':id')
-  public destroy(@Param('id') id: string) {
+  public async destroy(@Param('id') id: string) {
     try {
-      const data = this.usersService.destroy(id);
+      const data = await this.userService.destroy(id);
       return new ResponseEntity({
         data,
         message: 'success',
@@ -80,10 +84,10 @@ export class UsersController {
   @Put(':id')
   public async update(
     @Param('id') id: string,
-    @Body() createUserDto: CreateUserDto,
+    @Body() updateUsersDto: UpdateUsersDto,
   ) {
     try {
-      const data = await this.usersService.update(id, createUserDto);
+      const data = await this.userService.update(id, updateUsersDto);
       return new ResponseEntity({
         data,
         message: 'success',

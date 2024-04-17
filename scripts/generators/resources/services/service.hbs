@@ -13,11 +13,9 @@ export class {{className}}Service {
 
   public detail(id: string) {
     try {
-      return this.{{variableName}}Repository
-        .where({
-          id,
-        })
-        .firstOrThrow();
+      return this.{{variableName}}Repository.firstOrThrow({
+        id,
+      });
     } catch (error) {
       throw new Error(error);
     }
@@ -25,7 +23,9 @@ export class {{className}}Service {
 
   public async destroy(id: string) {
     try {
-      return this.{{variableName}}Repository.delete(id);
+      return this.{{variableName}}Repository.delete({
+        id,
+      });
     } catch (error) {
       throw new Error(error);
     }
@@ -33,10 +33,7 @@ export class {{className}}Service {
 
   public async create(create{{className}}Dto: Create{{className}}Dto) {
     try {
-      return this.{{variableName}}Repository.create({
-        email: create{{className}}Dto.email,
-        name: create{{className}}Dto.name,
-      });
+      return this.{{variableName}}Repository.create(create{{className}}Dto);
     } catch (error) {
       throw new Error(error);
     }
@@ -44,10 +41,7 @@ export class {{className}}Service {
 
   public async update(id: string, update{{className}}Dto: Update{{className}}Dto) {
     try {
-      return this.{{variableName}}Repository.update(id, {
-        email: update{{className}}Dto.email,
-        name: update{{className}}Dto.name,
-      });
+      return this.{{variableName}}Repository.update({ id }, update{{className}}Dto);
     } catch (error) {
       throw new Error(error);
     }
