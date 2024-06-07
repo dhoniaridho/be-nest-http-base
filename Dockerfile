@@ -7,9 +7,7 @@ FROM base AS dependencies
 
 WORKDIR /app
 COPY package.json pnpm-lock.yaml ./
-RUN npm install husky -g
 RUN pnpm install
-RUN pnpm db:generate
 
 FROM base AS build
 
@@ -17,6 +15,7 @@ WORKDIR /app
 COPY . .
 COPY --from=dependencies /app/node_modules ./node_modules
 RUN pnpm build
+RUN pnpm db:generate
 RUN pnpm prune --prod --config.ignore-scripts=true
 
 FROM base AS deploy
