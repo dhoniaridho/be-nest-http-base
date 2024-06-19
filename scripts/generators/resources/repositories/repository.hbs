@@ -4,7 +4,7 @@ import { PaginationQueryDto } from 'src/common/dtos/pagination-query.dto';
 import { PaginatedEntity } from 'src/common/entities/paginated.entity';
 import { PrismaService } from 'src/platform/database/services/prisma.service';
 
-type Filter = {
+export type Filter = {
   where?: Prisma.{{modelName}}WhereInput;
   orderBy?: Prisma.{{modelName}}OrderByWithRelationInput;
   cursor?: Prisma.{{modelName}}WhereUniqueInput;
@@ -24,9 +24,15 @@ export class {{className}}Repository {
       this.prismaService.{{variableName}}.findMany({
         skip: (+page - 1) * +limit,
         take: +limit,
-        ...filter,
+        where: filter?.where,
+        orderBy: filter?.orderBy,
+        cursor: filter?.cursor,
+        include: filter?.include,
+        skip: filter?.skip
       }),
-      this.prismaService.{{variableName}}.count(),
+      this.prismaService.{{variableName}}.count({
+        where: filter?.where,
+      }),
     ]);
 
     return new PaginatedEntity(data, {
