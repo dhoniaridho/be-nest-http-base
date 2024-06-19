@@ -8,19 +8,14 @@ const { startCase } = require('lodash');
 const DEST_PATH = (mod) => cwd() + '/src/app/' + mod;
 const ORIGIN_PATH = cwd() + '/scripts/generators/resources';
 const FOLDERS = [
-  'controllers',
+  'controllers/http',
+  'controllers/microservice',
   'dtos',
   'entities',
   'repositories',
   'services',
   'types',
 ];
-
-const toTitleCase = (str) =>
-  str.replace(
-    /(^\w|\s\w)(\S*)/g,
-    (_, m1, m2) => m1.toUpperCase() + m2.toLowerCase(),
-  );
 
 const slugify = (string) => {
   return string
@@ -118,9 +113,16 @@ async function main() {
         ),
       },
       {
-        path: `${dest}/controllers/${fileName}.controller.ts`,
+        path: `${dest}/controllers/http/${fileName}.controller.ts`,
         content: fs.readFileSync(
-          `${ORIGIN_PATH}/controllers/controller.hbs`,
+          `${ORIGIN_PATH}/controllers/http/controller.hbs`,
+          'utf8',
+        ),
+      },
+      {
+        path: `${dest}/controllers/microservice/${fileName}.controller.ts`,
+        content: fs.readFileSync(
+          `${ORIGIN_PATH}/controllers/microservice/controller.hbs`,
           'utf8',
         ),
       },

@@ -10,10 +10,10 @@ import {
   Put,
   Query,
 } from '@nestjs/common';
-import { {{className}}Service } from '../services';
+import { {{className}}Service } from 'src/app/{{fileName}}/services';
 import { PaginationQueryDto } from 'src/common/dtos/pagination-query.dto';
 import { ResponseEntity } from 'src/common/entities/response.entity';
-import { Create{{className}}Dto, Update{{className}}Dto } from '../dtos';
+import { Create{{className}}Dto, Update{{className}}Dto } from 'src/app/{{fileName}}/dtos';
 import { ApiTags } from '@nestjs/swagger';
 
 @ApiTags('{{className}}')
@@ -21,7 +21,7 @@ import { ApiTags } from '@nestjs/swagger';
   path: '{{variableName}}',
   version: '1',
 })
-export class {{className}}Controller {
+export class {{className}}HttpController {
   constructor(private readonly {{variableName}}Service: {{className}}Service) {}
 
   @Post()

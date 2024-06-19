@@ -1,7 +1,9 @@
-import { NestFactory } from '@nestjs/core';
+import { NestFactory, repl } from '@nestjs/core';
 import { MainModule } from './main.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { Logger, ValidationPipe, VersioningType } from '@nestjs/common';
+import { ENV } from './config/env';
+import { MicroserviceOptions, Transport } from '@nestjs/microservices';
 
 async function bootstrap() {
   const app = await NestFactory.create(MainModule);
@@ -22,8 +24,46 @@ async function bootstrap() {
     credentials: true,
   });
   SwaggerModule.setup('api', app, document);
-  await app.listen(3000);
 
-  Logger.log(`Application is running on: ${await app.getUrl()}`);
+  if (!ENV.APP_PORT) {
+    Logger.warn(
+      'To enable http server, set APP_PORT=3000 in .env file',
+      'Application',
+    );
+  }
+  if (!ENV.RMQ_URL) {
+    Logger.warn(
+      'To enable microservice server, set RMQ_URL=amqp://localhost:5672 in .env file',
+      'Application',
+    );
+  }
+
+  if (ENV.APP_PORT) {
+    await app.listen(ENV.APP_PORT);
+    Logger.log(`Application is running on: ${await app.getUrl()}`);
+  }
+
+  if (ENV.RMQ_URL) {
+    const ms = await NestFactory.createMicroservice<MicroserviceOptions>(
+      MainModule,
+      {
+        transport: Transport.RMQ,
+        options: {
+          urls: [ENV.RMQ_URL],
+          queue: ENV.APP_NAME,
+          queueOptions: {
+            durable: false,
+          },
+        },
+      },
+    );
+    await ms.listen();
+    Logger.log(`Microservice is running on channel: ${ENV.APP_NAME}`);
+  }
+
+  if (ENV.REPL) {
+    await repl(MainModule);
+  }
 }
+
 bootstrap();
