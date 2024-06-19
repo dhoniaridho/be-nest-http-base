@@ -45,7 +45,7 @@ $ pnpm db:pull
 $ pnpm db:generate
 
 # create new feature with single command
-$ pnpm new:feature
+$ pnpm make:app
 ```
 
 ## Running the app
