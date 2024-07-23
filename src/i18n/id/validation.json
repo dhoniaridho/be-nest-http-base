@@ -1,0 +1,22 @@
+{
+  "string": "{property} harus berupa teks",
+  "min": "{property} minimal {min} karakter",
+  "max": "{property} maksimal {max} karakter",
+  "minLength": "{property} minimal {min} karakter",
+  "maxLength": "{property} maksimal {max} karakter",
+  "exactLength": "{property} harus {exact} karakter",
+  "greaterThan": "{property} harus lebih besar dari {min}",
+  "lessThan": "{property} harus lebih kecil dari {max}",
+  "greaterThanEqualTo": "{property} harus lebih besar dari atau sama dengan {min}",
+  "required": "{property} harus diisi",
+  "email": "{property} harus berupa email yang valid",
+  "strongPassword": "{property} harus mengandung minimal 8 karakter, 1 huruf kecil, 1 huruf kapital, dan 1 angka",
+  "alphaNumeric": "{property} harus berupa angka atau huruf",
+  "url": "{property} harus berupa URL yang valid",
+  "uuid": "{property} harus berupa UUID yang valid",
+  "alpha": "{property} harus berupa huruf",
+  "numeric": "{property} harus berupa angka",
+  "boolean": "{property} harus true atau false",
+  "date": "{property} harus berupa tanggal yang valid",
+  "array": "{property} harus berupa array"
+}

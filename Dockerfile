@@ -1,4 +1,5 @@
 FROM node:20-alpine AS base
+
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
 ENV APP_PORT 3000
@@ -24,7 +25,9 @@ FROM base AS deploy
 WORKDIR /app
 COPY --from=build /app/dist/ ./dist/
 COPY --from=build /app/node_modules ./node_modules
+COPY scripts/cmd/entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
 
-CMD [ "node", "dist/main.js" ]
+ENTRYPOINT [ "/entrypoint.sh" ]
 
 EXPOSE 3000

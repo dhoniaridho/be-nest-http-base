@@ -4,6 +4,7 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { Logger, ValidationPipe, VersioningType } from '@nestjs/common';
 import { ENV } from './config/env';
 import { MicroserviceOptions, Transport } from '@nestjs/microservices';
+import { I18nValidationPipe } from 'nestjs-i18n';
 
 async function bootstrap() {
   const app = await NestFactory.create(MainModule);
@@ -17,7 +18,15 @@ async function bootstrap() {
     .addSecurity('JWT', { type: 'http', scheme: 'bearer', bearerFormat: 'JWT' })
     .build();
   const document = SwaggerModule.createDocument(app, config);
-  app.useGlobalPipes(new ValidationPipe());
+  app.useGlobalPipes(
+    new ValidationPipe({
+      whitelist: true,
+      forbidUnknownValues: true,
+    }),
+  );
+
+  app.useGlobalPipes(new I18nValidationPipe());
+
   app.enableCors({
     allowedHeaders: '*',
     origin: '*',
