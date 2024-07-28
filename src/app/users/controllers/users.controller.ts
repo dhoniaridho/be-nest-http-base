@@ -16,7 +16,7 @@ import { PaginationQueryDto } from 'src/common/dtos/pagination-query.dto';
 import { ResponseEntity } from 'src/common/entities/response.entity';
 import { CreateUsersDto, UpdateUsersDto } from '../dtos';
 import { ApiSecurity, ApiTags } from '@nestjs/swagger';
-import { AuthGuard } from 'src/app/auth';
+import { AuthGuard } from '@app/auth';
 
 @ApiTags('Users')
 @ApiSecurity('JWT')

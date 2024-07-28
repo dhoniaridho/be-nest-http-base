@@ -1,10 +1,17 @@
 import { NestFactory, repl } from '@nestjs/core';
 import { MainModule } from './main.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import { Logger, ValidationPipe, VersioningType } from '@nestjs/common';
+import {
+  HttpException,
+  HttpStatus,
+  Logger,
+  ValidationPipe,
+  VersioningType,
+} from '@nestjs/common';
 import { ENV } from './config/env';
 import { MicroserviceOptions, Transport } from '@nestjs/microservices';
-import { I18nValidationPipe } from 'nestjs-i18n';
+import { ResponseEntity } from './common/entities/response.entity';
+import { HttpExceptionFilter } from './common/filters/exception.filter';
 
 async function bootstrap() {
   const app = await NestFactory.create(MainModule);
@@ -18,21 +25,38 @@ async function bootstrap() {
     .addSecurity('JWT', { type: 'http', scheme: 'bearer', bearerFormat: 'JWT' })
     .build();
   const document = SwaggerModule.createDocument(app, config);
+
   app.useGlobalPipes(
     new ValidationPipe({
-      whitelist: true,
       forbidUnknownValues: true,
+      transform: true,
+      exceptionFactory(errors) {
+        throw new HttpException(
+          new ResponseEntity({
+            errors: errors.map((err) => {
+              return {
+                field: err.property,
+                message: Object.values(err.constraints),
+              };
+            }),
+            status: HttpStatus.UNPROCESSABLE_ENTITY,
+            message: 'Unprocessable Entity',
+          }),
+          HttpStatus.UNPROCESSABLE_ENTITY,
+        );
+      },
     }),
   );
-
-  app.useGlobalPipes(new I18nValidationPipe());
 
   app.enableCors({
     allowedHeaders: '*',
     origin: '*',
     credentials: true,
   });
-  SwaggerModule.setup('api', app, document);
+
+  if (process.env.NODE_ENV !== 'production') {
+    SwaggerModule.setup('api', app, document);
+  }
 
   if (!ENV.APP_PORT) {
     Logger.warn(

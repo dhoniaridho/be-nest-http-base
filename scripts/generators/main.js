@@ -120,6 +120,13 @@ async function main() {
         ),
       },
       {
+        path: `${dest}/controllers/http/${fileName}.controller.spec.ts`,
+        content: fs.readFileSync(
+          `${ORIGIN_PATH}/controllers/http/test.hbs`,
+          'utf8',
+        ),
+      },
+      {
         path: `${dest}/controllers/microservice/${fileName}.controller.ts`,
         content: fs.readFileSync(
           `${ORIGIN_PATH}/controllers/microservice/controller.hbs`,
