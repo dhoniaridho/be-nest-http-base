@@ -27,8 +27,7 @@ export class {{className}}Repository {
         where: filter?.where,
         orderBy: filter?.orderBy,
         cursor: filter?.cursor,
-        include: filter?.include,
-        skip: filter?.skip
+        skip: filter?.skip,
       }),
       this.prismaService.{{variableName}}.count({
         where: filter?.where,

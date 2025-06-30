@@ -23,10 +23,9 @@ export class AuthService {
       name: user.fullName,
     });
 
-    delete user.password;
     return {
       token,
-      user,
+      user: user,
     };
   }
 

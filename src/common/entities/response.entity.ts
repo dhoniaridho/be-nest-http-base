@@ -1,7 +1,7 @@
 import { HttpStatus } from '@nestjs/common';
 
 export class ResponseEntity<T = unknown> {
-  data: T;
+  data?: T;
   message?: string;
   status?: HttpStatus;
   errors?: { field: string; message: string[] }[];

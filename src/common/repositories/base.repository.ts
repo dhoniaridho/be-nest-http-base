@@ -6,7 +6,7 @@ import { RequireAtLeastOne } from '../types/utils.type';
 
 export class BaseRepository<Where, Select, OrderBy, Include, Create> {
   private _where: Partial<Where> = {};
-  private _select: Partial<Select> = undefined;
+  private _select?: Partial<Select> = undefined;
   private _orderBy: Partial<OrderBy> = {};
   private _include: Partial<Include> = {};
 

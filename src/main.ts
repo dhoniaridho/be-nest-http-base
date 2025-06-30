@@ -11,7 +11,6 @@ import {
 import { ENV } from './config/env';
 import { MicroserviceOptions, Transport } from '@nestjs/microservices';
 import { ResponseEntity } from './common/entities/response.entity';
-import { HttpExceptionFilter } from './common/filters/exception.filter';
 
 async function bootstrap() {
   const app = await NestFactory.create(MainModule);
@@ -36,7 +35,7 @@ async function bootstrap() {
             errors: errors.map((err) => {
               return {
                 field: err.property,
-                message: Object.values(err.constraints),
+                message: Object.values(err.constraints || {}),
               };
             }),
             status: HttpStatus.UNPROCESSABLE_ENTITY,
